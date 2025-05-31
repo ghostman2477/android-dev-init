@@ -23,13 +23,13 @@
                 <item
                     android:id="@+id/po"
                     android:icon="@drawable/ic_shopping_bag"
-                    android:title="Party Orders"
+                    android:title="Previous Orders"
                      />
-                <item
-                    android:id="@+id/ro"
-                    android:icon="@drawable/ic_shopping_bag"
-                    android:title="Retail Orders"
-                />
+<!--                <item-->
+<!--                    android:id="@+id/ro"-->
+<!--                    android:icon="@drawable/ic_shopping_bag"-->
+<!--                    android:title="Retail Orders"-->
+<!--                />-->
             </menu>
         </item>
         <item
