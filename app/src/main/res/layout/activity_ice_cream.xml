@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@android:color/white"
+    tools:context=".IceCreamActivity"> <ImageView
+    android:id="@+id/iceCreamImageView"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/placeholder_ice_cream"
+    android:contentDescription="Ice Cream Image Placeholder"
+    android:layout_marginBottom="48dp"
+    android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/iceCreamTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ICE CREAM"
+        android:textAppearance="?attr/textAppearanceHeadline3"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="48dp" />
+
+    <Button
+        android:id="@+id/individualOrderButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PLACE INDIVIDUAL ORDER"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="@android:color/white"
+        android:paddingVertical="16dp"
+        android:layout_marginBottom="16dp"
+        app:cornerRadius="8dp"
+        android:textAppearance="?attr/textAppearanceButton"/>
+
+    <Button
+        android:id="@+id/partyOrderButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PLACE PARTY ORDER"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="@android:color/white"
+        android:paddingVertical="16dp"
+        app:cornerRadius="8dp"
+        android:textAppearance="?attr/textAppearanceButton"/>
+
+</LinearLayout>
