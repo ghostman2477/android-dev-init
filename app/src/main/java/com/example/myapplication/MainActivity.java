@@ -62,27 +62,27 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
         hamburgerButton = findViewById(R.id.hamburgerButton);
-        orderTypeToggleButton = findViewById(R.id.toggleButton3); // Initialize the ToggleButton
+        //orderTypeToggleButton = findViewById(R.id.toggleButton3); // Initialize the ToggleButton
 
         // --- ToggleButton Listener to redirect to IceCreamActivity ---
-        orderTypeToggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Toast to confirm action (optional, for debugging)
-            if (isChecked) {
-                Toast.makeText(MainActivity.this, "Redirecting to Ice Cream Screen (Party Mode)", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(MainActivity.this, "Redirecting to Ice Cream Screen (Individual Mode)", Toast.LENGTH_SHORT).show();
-            }
-
-            // Create an Intent to go to IceCreamActivity
-            Intent intent = new Intent(MainActivity.this, IceCreamActivity.class);
-
-            // OPTIONAL: Pass the toggle state to IceCreamActivity
-            intent.putExtra("ORDER_TYPE_IS_PARTY", isChecked); // true for Party, false for Individual
-
-            startActivity(intent); // Start the IceCreamActivity
-            // Optional: finish MainActivity if you don't want to come back to it with the back button
-            // finish();
-        });
+//        orderTypeToggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//            // Toast to confirm action (optional, for debugging)
+//            if (isChecked) {
+//                Toast.makeText(MainActivity.this, "Redirecting to Ice Cream Screen (Party Mode)", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(MainActivity.this, "Redirecting to Ice Cream Screen (Individual Mode)", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            // Create an Intent to go to IceCreamActivity
+//            Intent intent = new Intent(MainActivity.this, IceCreamActivity.class);
+//
+//            // OPTIONAL: Pass the toggle state to IceCreamActivity
+//            intent.putExtra("ORDER_TYPE_IS_PARTY", isChecked); // true for Party, false for Individual
+//
+//            startActivity(intent); // Start the IceCreamActivity
+//            // Optional: finish MainActivity if you don't want to come back to it with the back button
+//            // finish();
+//        });
         // --- End ToggleButton Listener ---
 
 
