@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,24 +14,28 @@ public class IceCreamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ice_cream); // This line sets the layout for this Activity
 
-        // Get references to the buttons from your layout
-        Button individualOrderButton = findViewById(R.id.individualOrderButton);
-        Button partyOrderButton = findViewById(R.id.partyOrderButton);
+        Button retailButton = findViewById(R.id.individualOrderButton); // Get the button instance
+        Button poButton = findViewById(R.id.partyOrderButton); // Get the button instance
 
-        // Set click listener for the "Place Individual Order" button
-        individualOrderButton.setOnClickListener(v -> {
-            Toast.makeText(IceCreamActivity.this, "Individual Order Placed!", Toast.LENGTH_SHORT).show();
-            // TODO: Add logic here to proceed with individual order (e.g., start a new activity)
-            // Example: If you want to go to MainActivity (your e-commerce app) after this
-            // Intent intent = new Intent(IceCreamActivity.this, MainActivity.class);
-            // startActivity(intent);
-            // finish(); // Optional: finish this activity so user can't go back to it
+// Set a click listener
+        retailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the button click event
+                Intent intent = new Intent(IceCreamActivity.this, MainActivity.class);
+                startActivity(intent); // Move to another screen
+            }
         });
 
-        // Set click listener for the "Place Party Order" button
-        partyOrderButton.setOnClickListener(v -> {
-            Toast.makeText(IceCreamActivity.this, "Party Order Placed!", Toast.LENGTH_SHORT).show();
-            // TODO: Add logic here to proceed with party order (e.g., start a new activity)
+        poButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the button click event
+                Intent intent = new Intent(IceCreamActivity.this, MainActivity.class);
+                startActivity(intent); // Move to another screen
+            }
         });
+
     }
+
 }
