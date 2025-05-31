@@ -10,14 +10,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.activity.OnBackPressedCallback;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,8 +52,21 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.nav_home) {
                 Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_categories) {
+                if (item.getItemId() == R.id.nav_categories) {
+                    SubMenu subMenu = item.getSubMenu();
+                    if (subMenu != null) {
+                        for (int i = 0; i < subMenu.size(); i++) {
+                            MenuItem subItem = subMenu.getItem(i);
+                            subItem.setVisible(!subItem.isVisible()); // Toggle visibility
+                        }
+                    }
+                }
+
                 Toast.makeText(this, "Categories Clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_orders) {
+            } else if(id == R.id.po) {
+                Intent intent = new Intent(MainActivity.this, IceCreamShowList.class);
+                startActivity(intent);
+            }else if (id == R.id.nav_orders) {
                 Toast.makeText(this, "Orders Clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_profile) {
                 Toast.makeText(this, "Profile Clicked", Toast.LENGTH_SHORT).show();
