@@ -9,6 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.activity.OnBackPressedCallback;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         // --- Setup Categories RecyclerView ---
         categoriesRecyclerView = findViewById(R.id.categoriesRecyclerView);
         // Assuming content_main.xml uses LinearLayoutManager for vertical scrolling or GridLayoutManager
-        categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         // If you want a grid, use: categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns for categories
         List<Category> categories = new ArrayList<>();
         // Add sample categories (replace with your actual category icons/data)
