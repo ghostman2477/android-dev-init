@@ -38,12 +38,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
 
         // Bind data to the views in the ViewHolder
-        holder.categoryName.setText(category.getName());
-        holder.categoryIcon.setImageResource(category.getIconUrl());
+        holder.categoryName.setText(category.getCategoryName());
+      //  holder.categoryIcon.setImageResource(category.getIconUrl());
 
         // Optional: Add a click listener for the entire item
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Clicked Category: " + category.getName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), "Clicked Category: " + category.getCategoryName(), Toast.LENGTH_SHORT).show();
             // Here you can add logic to go to a category specific listing page
             // Example: Intent intent = new Intent(v.getContext(), CategoryProductsActivity.class);
             // intent.putExtra("category_name", category.getName());

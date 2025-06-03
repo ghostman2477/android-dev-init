@@ -63,28 +63,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
         hamburgerButton = findViewById(R.id.hamburgerButton);
-        //orderTypeToggleButton = findViewById(R.id.toggleButton3); // Initialize the ToggleButton
+        ArrayList<Category> receivedItems = getIntent().getParcelableArrayListExtra("category_list");
 
-        // --- ToggleButton Listener to redirect to IceCreamActivity ---
-//        orderTypeToggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            // Toast to confirm action (optional, for debugging)
-//            if (isChecked) {
-//                Toast.makeText(MainActivity.this, "Redirecting to Ice Cream Screen (Party Mode)", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(MainActivity.this, "Redirecting to Ice Cream Screen (Individual Mode)", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            // Create an Intent to go to IceCreamActivity
-//            Intent intent = new Intent(MainActivity.this, IceCreamActivity.class);
-//
-//            // OPTIONAL: Pass the toggle state to IceCreamActivity
-//            intent.putExtra("ORDER_TYPE_IS_PARTY", isChecked); // true for Party, false for Individual
-//
-//            startActivity(intent); // Start the IceCreamActivity
-//            // Optional: finish MainActivity if you don't want to come back to it with the back button
-//            // finish();
-//        });
-        // --- End ToggleButton Listener ---
+        System.out.println("MainActivity"+ receivedItems.get(0).getCategoryName());
+
 
 
         // --- Setup Featured Products RecyclerView ---
@@ -106,13 +88,9 @@ public class MainActivity extends AppCompatActivity {
         categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         // If you want a grid, use: categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns for categories
         List<Category> categories = new ArrayList<>();
-        // Add sample categories (replace with your actual category icons/data)
-        categories.add(new Category("Electronics", R.drawable.placeholder_category_icon));
-        categories.add(new Category("Fashion", R.drawable.placeholder_category_icon));
-        categories.add(new Category("Home & Kitchen", R.drawable.placeholder_category_icon));
-        categories.add(new Category("Books", R.drawable.placeholder_category_icon));
-        categories.add(new Category("Sports", R.drawable.placeholder_category_icon));
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
+
+        CategoryAdapter categoryAdapter = new CategoryAdapter(receivedItems);
+
         categoriesRecyclerView.setAdapter(categoryAdapter);
 
 
