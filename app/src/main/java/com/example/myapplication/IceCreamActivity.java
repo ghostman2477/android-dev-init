@@ -24,7 +24,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class IceCreamActivity extends AppCompatActivity {
-
+    ArrayList<Category> categories = new ArrayList<>();
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:7017/") // Base URL
             .addConverterFactory(GsonConverterFactory.create())
@@ -39,12 +39,9 @@ public class IceCreamActivity extends AppCompatActivity {
         Button retailButton = findViewById(R.id.individualOrderButton); // Get the button instance
         Button poButton = findViewById(R.id.partyOrderButton); // Get the button instance
 
-// Set a click listener
-        retailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                apiService.makeRequest().enqueue(new Callback<ResponseBody>() {
+
+        apiService.makeRequest().enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
@@ -53,7 +50,7 @@ public class IceCreamActivity extends AppCompatActivity {
                                 String jsonString = response.body().string(); // Convert ResponseBody to String
                                 Gson gson = new Gson();
                                 Type listType = new TypeToken<ArrayList<Category>>() {}.getType();
-                                ArrayList<Category> categories = new Gson().fromJson(jsonString, listType);
+                                categories = new Gson().fromJson(jsonString, listType);
                                 for(int i=0;i<categories.size();i++){
                                     System.out.println(categories.get(i).getCategoryName());
                                 }
@@ -61,10 +58,7 @@ public class IceCreamActivity extends AppCompatActivity {
                                 System.out.println(categories);
                                 Log.d("Response", response.body().string());
 
-                                // Handle the button click event
-                                Intent intent = new Intent(IceCreamActivity.this, MainActivity.class);
-                                intent.putParcelableArrayListExtra("category_list", categories);
-                                startActivity(intent); // Move to another screen
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
@@ -77,8 +71,16 @@ public class IceCreamActivity extends AppCompatActivity {
                     }
                 });
 
+        // Set a click listener
+        retailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        // Handle the button click event
+        Intent intent = new Intent(IceCreamActivity.this, MainActivity.class);
+        intent.putParcelableArrayListExtra("category_list", categories);
+        startActivity(intent);
             }
-        });
+       });
 
         poButton.setOnClickListener(new View.OnClickListener() {
             @Override
