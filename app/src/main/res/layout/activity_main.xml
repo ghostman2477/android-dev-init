@@ -22,4 +22,7 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/drawer_menu" />
 
+        <include layout="@layout/content_main" />
+
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,16 +39,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
 
         // Bind data to the views in the ViewHolder
-        holder.categoryName.setText(category.getName());
-        holder.categoryIcon.setImageResource(category.getIconUrl());
+        holder.categoryName.setText(category.getCategoryName());
+      //  holder.categoryIcon.setImageResource(category.getIconUrl());
 
         // Optional: Add a click listener for the entire item
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Clicked Category: " + category.getName(), Toast.LENGTH_SHORT).show();
-            // Here you can add logic to go to a category specific listing page
-            // Example: Intent intent = new Intent(v.getContext(), CategoryProductsActivity.class);
+            Toast.makeText(v.getContext(), "Clicked Category: " + category.getCategoryName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), IceCreamShowList.class);
             // intent.putExtra("category_name", category.getName());
-            // v.getContext().startActivity(intent);
+             v.getContext().startActivity(intent);
         });
     }
 
@@ -63,8 +63,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryIcon = itemView.findViewById(R.id.categoryIconImageView);
-            categoryName = itemView.findViewById(R.id.categoryNameTextView);
+            categoryIcon = itemView.findViewById(R.id.catImageView);
+            categoryName = itemView.findViewById(R.id.catNameTextView);
         }
     }
 }
