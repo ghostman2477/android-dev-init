@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast; // For the click listener example
@@ -28,7 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for a single product item
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false);
+                .inflate(R.layout.product_card, parent, false);
         return new ProductViewHolder(view);
     }
 
@@ -40,14 +42,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(product.getName());
         holder.productPrice.setText(product.getPrice());
         holder.productImage.setImageResource(product.getImageUrl());
+        holder.productQuantity.setText(String.valueOf(product.getQuantity()));
+        holder.buttonPlus.setTextColor(Color.BLACK);
+        holder.buttonMinus.setTextColor(Color.BLACK);
+        holder.buttonPlus.setVisibility(View.VISIBLE);
+        holder.buttonMinus.setVisibility(View.VISIBLE);
+        holder.buttonPlus.setAlpha(1.0f);
+        holder.buttonMinus.setAlpha(1.0f);
 
-        // Optional: Add a click listener for the entire item
-        holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Clicked: " + product.getName(), Toast.LENGTH_SHORT).show();
-            // Here you can add logic to go to a product detail page
-            // Example: Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
-            // intent.putExtra("product_id", product.getId()); // If Product has an ID
-            // v.getContext().startActivity(intent);
+
+        holder.buttonPlus.setOnClickListener(v -> {
+            product.setQuantity(product.getQuantity() + 1);
+            holder.productQuantity.setText(String.valueOf(product.getQuantity()));
+        });
+
+        holder.buttonMinus.setOnClickListener(v -> {
+            if (product.getQuantity() > 1) {
+                product.setQuantity(product.getQuantity() - 1);
+                holder.productQuantity.setText(String.valueOf(product.getQuantity()));
+            }
         });
     }
 
@@ -62,11 +75,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         TextView productName;
         TextView productPrice;
 
+        TextView productQuantity;
+
+        Button buttonPlus, buttonMinus;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.productImageView);
-            productName = itemView.findViewById(R.id.productNameTextView);
-            productPrice = itemView.findViewById(R.id.productPriceTextView);
+            productImage = itemView.findViewById(R.id.productImage);
+            productName = itemView.findViewById(R.id.productName);
+            productPrice = itemView.findViewById(R.id.productPrice);
+            productQuantity = itemView.findViewById(R.id.textQuantity);
+            buttonPlus = itemView.findViewById(R.id.buttonPlus);
+            buttonMinus = itemView.findViewById(R.id.buttonMinus);
         }
+
+
     }
+
 }
