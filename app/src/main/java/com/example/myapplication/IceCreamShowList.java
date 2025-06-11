@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -15,10 +17,22 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class IceCreamShowList extends AppCompatActivity {
 
@@ -27,6 +41,13 @@ public class IceCreamShowList extends AppCompatActivity {
     private NavigationView navigationView;
     private RecyclerView productsRecyclerView;
 
+    private ExtendedFloatingActionButton fab;
+    ArrayList<Product> products = new ArrayList<>();
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:7017/") // Base URL
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    ApiService apiService = retrofit.create(ApiService.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +57,41 @@ public class IceCreamShowList extends AppCompatActivity {
         hamburgerButton = findViewById(R.id.hamburgerButton);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
-
-
+        fab = findViewById(R.id.fab);
         hamburgerButton.setOnClickListener(v -> drawerLayout.openDrawer(navigationView));
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        String category = getIntent().getStringExtra("category_name");
+
         List<Product> categorisedProducts = new ArrayList<>();
-        // Add sample products (replace with your actual product images/data)
-        categorisedProducts.add(new Product("Stylish Watch", "$120.00", R.drawable.placeholder_product_image,1));
-        categorisedProducts.add(new Product("Stylish Watch", "$75.50", R.drawable.placeholder_product_image,1));
-        categorisedProducts.add(new Product("Stylish Watch", "$50.00", R.drawable.placeholder_product_image,1));
-        categorisedProducts.add(new Product("Stylish Watch", "$90.00", R.drawable.placeholder_product_image,1));
-        ProductAdapter productAdapter = new ProductAdapter(categorisedProducts);
-        productsRecyclerView.setAdapter(productAdapter);
+        apiService.fetchProduct(category).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String jsonString = response.body().string(); // Convert ResponseBody to String
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<ArrayList<Product>>() {}.getType();
+                        products = new Gson().fromJson(jsonString, listType);
+                        for(int i=0;i<products.size();i++){
+                           System.out.println(products.get(i).getProductName());
+                        }
+                        ProductAdapter productAdapter = new ProductAdapter(products,fab);
+                        productsRecyclerView.setAdapter(productAdapter);
+                        Log.d("Response", response.body().string());
 
 
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Error", t.getMessage());
+            }
+        });
 
 
     }

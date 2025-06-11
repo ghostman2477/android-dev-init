@@ -46,7 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), "Clicked Category: " + category.getCategoryName(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), IceCreamShowList.class);
-            // intent.putExtra("category_name", category.getName());
+            intent.putExtra("category_name", category.getCategoryName());
              v.getContext().startActivity(intent);
         });
     }
