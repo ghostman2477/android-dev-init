@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast; // For the click listener example
@@ -12,15 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R; // Make sure this import is correct for your R file
 import com.example.myapplication.Product; // Import your Product model class
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private List<Product> productList;
+    private Context context;
 
-    public ProductAdapter(List<Product> productList) {
+    private ExtendedFloatingActionButton fab;
+    public ProductAdapter(List<Product> productList,ExtendedFloatingActionButton fab) {
         this.productList = productList;
+        this.fab = fab;
     }
 
     @NonNull
@@ -28,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for a single product item
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false);
+                .inflate(R.layout.product_card, parent, false);
         return new ProductViewHolder(view);
     }
 
@@ -37,17 +45,33 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = productList.get(position);
 
         // Bind data to the views in the ViewHolder
-        holder.productName.setText(product.getName());
-        holder.productPrice.setText(product.getPrice());
-        holder.productImage.setImageResource(product.getImageUrl());
+        holder.productName.setText(product.getProductName());
+        holder.productPrice.setText(product.getProductPrice());
+       // int resourceId = context.getResources().getIdentifier(product.getProductImageUrl(), "drawable", context.getPackageName());
+       // holder.productImage.setImageResource(resourceId);
+        //holder.productQuantity.setText(String.valueOf(product.getInStock()));
+        holder.buttonPlus.setTextColor(Color.BLACK);
+        holder.buttonMinus.setTextColor(Color.BLACK);
+        holder.buttonPlus.setVisibility(View.VISIBLE);
+        holder.buttonMinus.setVisibility(View.VISIBLE);
+        holder.buttonPlus.setAlpha(1.0f);
+        holder.buttonMinus.setAlpha(1.0f);
 
-        // Optional: Add a click listener for the entire item
-        holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Clicked: " + product.getName(), Toast.LENGTH_SHORT).show();
-            // Here you can add logic to go to a product detail page
-            // Example: Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
-            // intent.putExtra("product_id", product.getId()); // If Product has an ID
-            // v.getContext().startActivity(intent);
+
+        holder.buttonPlus.setOnClickListener(v -> {
+            product.setInStock(Integer.parseInt(holder.productQuantity.getText().toString())+ 1);
+            holder.productQuantity.setText(String.valueOf(product.getInStock()));
+            if(fab.getVisibility() == View.INVISIBLE){
+                fab.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+        holder.buttonMinus.setOnClickListener(v -> {
+            if (product.getInStock() > 1) {
+                product.setInStock(product.getInStock() - 1);
+                holder.productQuantity.setText(String.valueOf(product.getInStock()));
+            }
         });
     }
 
@@ -62,11 +86,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         TextView productName;
         TextView productPrice;
 
+        TextView productQuantity;
+
+        Button buttonPlus, buttonMinus;
+
+
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.productImageView);
-            productName = itemView.findViewById(R.id.productNameTextView);
-            productPrice = itemView.findViewById(R.id.productPriceTextView);
+            productImage = itemView.findViewById(R.id.productImage);
+            productName = itemView.findViewById(R.id.productName);
+            productPrice = itemView.findViewById(R.id.productPrice);
+            productQuantity = itemView.findViewById(R.id.textQuantity);
+            buttonPlus = itemView.findViewById(R.id.buttonPlus);
+            buttonMinus = itemView.findViewById(R.id.buttonMinus);
+
         }
+
+
     }
+
 }

@@ -72,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
         // --- Setup Featured Products RecyclerView ---
         featuredProductsRecyclerView = findViewById(R.id.featuredProductsRecyclerView);
         featuredProductsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        List<Product> featuredProducts = new ArrayList<>();
+     /*   List<Product> featuredProducts = new ArrayList<>();
         // Add sample products (replace with your actual product images/data)
-        featuredProducts.add(new Product("Stylish Watch", "$120.00", R.drawable.placeholder_product_image));
-        featuredProducts.add(new Product("Wireless Headphones", "$75.50", R.drawable.placeholder_product_image));
-        featuredProducts.add(new Product("Smart Speaker", "$50.00", R.drawable.placeholder_product_image));
-        featuredProducts.add(new Product("Designer Backpack", "$90.00", R.drawable.placeholder_product_image));
+        featuredProducts.add(new Product("Stylish Watch", "$120.00", R.drawable.placeholder_product_image,1));
+        featuredProducts.add(new Product("Wireless Headphones", "$75.50", R.drawable.placeholder_product_image,1));
+        featuredProducts.add(new Product("Smart Speaker", "$50.00", R.drawable.placeholder_product_image,1));
+        featuredProducts.add(new Product("Designer Backpack", "$90.00", R.drawable.placeholder_product_image,1));
         ProductAdapter productAdapter = new ProductAdapter(featuredProducts);
-        featuredProductsRecyclerView.setAdapter(productAdapter);
+        featuredProductsRecyclerView.setAdapter(productAdapter);*/
 
 
         // --- Setup Categories RecyclerView ---

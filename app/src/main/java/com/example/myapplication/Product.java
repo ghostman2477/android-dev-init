@@ -3,31 +3,87 @@
 package com.example.myapplication;
 
 public class Product {
-    private String name;
-    private String price;
-    private int imageUrl; // Using int for drawable resource ID
+    private String productName;
+    private String productPrice;
+    private int inStock;
+    private int partyDiscount;
+    private int individualDiscount;
 
-    public Product(String name, String price, int imageUrl) {
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    // Getters for your product properties
-    public String getName() {
-        return name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getPrice() {
-        return price;
+    public String getFlavourName() {
+        return flavourName;
     }
 
-    public int getImageUrl() {
-        return imageUrl;
+    public void setFlavourName(String flavourName) {
+        this.flavourName = flavourName;
     }
 
-    // You can add setters if you need to modify properties after creation
-    // public void setName(String name) { this.name = name; }
-    // public void setPrice(String price) { this.price = price; }
-    // public void setImageUrl(int imageUrl) { this.imageUrl = imageUrl; }
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getProductImageUrl() {
+        return productImageUrl;
+    }
+
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
+    }
+
+    public int getIndividualDiscount() {
+        return individualDiscount;
+    }
+
+    public void setIndividualDiscount(int individualDiscount) {
+        this.individualDiscount = individualDiscount;
+    }
+
+    public int getPartyDiscount() {
+        return partyDiscount;
+    }
+
+    public void setPartyDiscount(int partyDiscount) {
+        this.partyDiscount = partyDiscount;
+    }
+
+    public int getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
+    }
+
+    public String getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    private String productImageUrl;
+    private String brandName;
+    private String flavourName;
+    private String categoryName;
+
 }
