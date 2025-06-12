@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/checkoutProductImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/cart_placeholder" /> <TextView
+        android:id="@+id/checkoutProductNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/checkoutQuantityControls"
+        app:layout_constraintStart_toEndOf="@+id/checkoutProductImageView"
+        app:layout_constraintTop_toTopOf="@+id/checkoutProductImageView"
+        tools:text="Durex Extra Time Longer Lasting Condom" />
+
+        <TextView
+            android:id="@+id/checkoutPackInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/checkoutProductNameTextView"
+            app:layout_constraintStart_toStartOf="@+id/checkoutProductNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/checkoutProductNameTextView"
+            tools:text="1 pack (3 pieces)" />
+
+        <TextView
+            android:id="@+id/saveForLaterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Save for later"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/checkoutProductNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutPackInfoTextView" />
+
+        <LinearLayout
+            android:id="@+id/checkoutQuantityControls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/checkoutProductNameTextView">
+
+            <Button
+                android:id="@+id/checkoutMinusButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="-"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/checkoutQuantityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="1" />
+
+            <Button
+                android:id="@+id/checkoutPlusButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="+"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/checkoutPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/checkoutQuantityControls"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutQuantityControls"
+            tools:text="₹90" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
