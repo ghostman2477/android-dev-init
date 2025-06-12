@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.glide)
+    annotationProcessor(libs.annotationProcessor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

@@ -18,6 +18,8 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
 retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version = "2.9.0" }
+glide = { module = "com.github.bumptech.glide:glide", version = "4.16.0"}
+annotationProcessor = { module = "com.github.bumptech.glide:compiler", version = "4.16.0"}
 
 
 [plugins]
