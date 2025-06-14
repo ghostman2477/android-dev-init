@@ -1,20 +1,15 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -43,6 +38,8 @@ public class IceCreamShowList extends AppCompatActivity {
 
     private ExtendedFloatingActionButton fab;
     ArrayList<Product> products = new ArrayList<>();
+
+    private ArrayList<ProductAddToCart> productAddToCarts = new ArrayList<>();
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:7017/") // Base URL
             .addConverterFactory(GsonConverterFactory.create())
@@ -74,9 +71,9 @@ public class IceCreamShowList extends AppCompatActivity {
                         Type listType = new TypeToken<ArrayList<Product>>() {}.getType();
                         products = new Gson().fromJson(jsonString, listType);
                         for(int i=0;i<products.size();i++){
-                           System.out.println(products.get(i).getProductName());
+                           System.out.println("OK"+products.get(i).getProductName());
                         }
-                        ProductAdapter productAdapter = new ProductAdapter(products,fab);
+                        ProductAdapter productAdapter = new ProductAdapter(productAddToCarts,products,fab);
                         productsRecyclerView.setAdapter(productAdapter);
                         Log.d("Response", response.body().string());
 
@@ -93,6 +90,18 @@ public class IceCreamShowList extends AppCompatActivity {
             }
         });
 
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Your action here
+                for(int i=0;i<productAddToCarts.size();i++){
+                    System.out.println(productAddToCarts.get(i).getProductName()+productAddToCarts.get(i).getProductId()
+                    +productAddToCarts.get(i).getQtySelected());
+                }
+              Intent intent = new Intent(view.getContext(), ProductSummary.class);
+              intent.putParcelableArrayListExtra("productAddToCarts", productAddToCarts);
+              view.getContext().startActivity(intent);
+            }
+        });
     }
 }
