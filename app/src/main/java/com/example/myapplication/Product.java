@@ -3,12 +3,36 @@
 package com.example.myapplication;
 
 public class Product {
+    private String productId;
     private String productName;
     private String productPrice;
     private int inStock;
     private int partyDiscount;
     private int individualDiscount;
+    private String productImageUrl;
+    private String brandName;
+    private String flavourName;
+    private String categoryName;
+    public Product(String productId,String productName, String productPrice, int inStock, int partyDiscount, int individualDiscount, String productImageUrl, String brandName, String flavourName, String categoryName) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.inStock = inStock;
+        this.partyDiscount = partyDiscount;
+        this.individualDiscount = individualDiscount;
+        this.productImageUrl = productImageUrl;
+        this.brandName = brandName;
+        this.flavourName = flavourName;
+        this.categoryName = categoryName;
+    }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
     public String getCategoryName() {
         return categoryName;
     }
@@ -81,9 +105,6 @@ public class Product {
         this.productName = productName;
     }
 
-    private String productImageUrl;
-    private String brandName;
-    private String flavourName;
-    private String categoryName;
+
 
 }

@@ -18,6 +18,7 @@ import com.example.myapplication.Product; // Import your Product model class
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -25,8 +26,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productList;
     private Context context;
 
+    private ArrayList<ProductAddToCart> productAddToCarts = new ArrayList<>();
     private ExtendedFloatingActionButton fab;
-    public ProductAdapter(List<Product> productList,ExtendedFloatingActionButton fab) {
+    public ProductAdapter(ArrayList<ProductAddToCart> productAddToCarts, List<Product> productList,ExtendedFloatingActionButton fab) {
+        this.productAddToCarts = productAddToCarts;
         this.productList = productList;
         this.fab = fab;
     }
@@ -57,20 +60,45 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.buttonPlus.setAlpha(1.0f);
         holder.buttonMinus.setAlpha(1.0f);
 
-
+        ProductAddToCart p = new ProductAddToCart();
         holder.buttonPlus.setOnClickListener(v -> {
-            product.setInStock(Integer.parseInt(holder.productQuantity.getText().toString())+ 1);
+            int qtyselected = Integer.parseInt(holder.productQuantity.getText().toString())+ 1;
+            product.setInStock(qtyselected);
             holder.productQuantity.setText(String.valueOf(product.getInStock()));
             if(fab.getVisibility() == View.INVISIBLE){
                 fab.setVisibility(View.VISIBLE);
+            }
+            if(productAddToCarts.contains(p)){
+                for (int i=0;i<productAddToCarts.size();i++) {
+                    ProductAddToCart productsInCart = productAddToCarts.get(i);
+                    if (productsInCart.getProductId().equals(product.getProductId())) {
+                        productsInCart.setQtySelected(qtyselected);
+                        productAddToCarts.set(i, productsInCart);
+                        break;
+                    }
+                }
+            }
+            else {
+                p.setQtySelected(qtyselected);
+                p.setProductId(product.getProductId());
+                p.setProductName(product.getProductName());
+                p.setBrandName(product.getProductName());
+                p.setCategoryName(product.getCategoryName());
+                p.setFlavourName(product.getFlavourName());
+                p.setProductPrice(product.getProductPrice());
+                productAddToCarts.add(p);
             }
 
         });
 
         holder.buttonMinus.setOnClickListener(v -> {
-            if (product.getInStock() > 1) {
-                product.setInStock(product.getInStock() - 1);
+            int qtyremoved = product.getInStock() - 1;
+            if (qtyremoved > 1) {
+                product.setInStock(qtyremoved);
                 holder.productQuantity.setText(String.valueOf(product.getInStock()));
+            }
+            else{
+                productAddToCarts.remove(p);
             }
         });
     }
