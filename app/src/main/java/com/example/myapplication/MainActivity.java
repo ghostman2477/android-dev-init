@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         categoriesRecyclerView.setAdapter(categoryAdapter);
 
-        navigationView.inflateMenu(R.menu.drawer_menu);
+      //  navigationView.inflateMenu(R.menu.drawer_menu);
         hamburgerButton.setOnClickListener(v ->drawerLayout.openDrawer(GravityCompat.START));
 
 
@@ -102,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
             if(id == R.id.nav_home){
                 Toast.makeText(MainActivity.this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, IceCreamActivity.class);
+                startActivity(intent);
+            }
+            else if(id == R.id.nav_orders ){
+                Toast.makeText(MainActivity.this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, TrackOrder.class);
                 startActivity(intent);
             }
             return true;
