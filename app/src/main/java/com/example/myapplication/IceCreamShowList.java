@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,8 +60,22 @@ public class IceCreamShowList extends AppCompatActivity {
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         String category = getIntent().getStringExtra("category_name");
-
+        navigationView.setClickable(true);
+        navigationView.setFocusable(true);
+        navigationView.bringToFront(); // Even though it appears visible
+        navigationView.requestLayout();
+        navigationView.invalidate();
         List<Product> categorisedProducts = new ArrayList<>();
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if(id == R.id.nav_home){
+                Toast.makeText(this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, IceCreamActivity.class);
+                startActivity(intent);
+            }
+            return true;
+        });
+
         apiService.fetchProduct(category).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -3,6 +3,7 @@ package com.example.myapplication;// MainActivity.java
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.graphics.Insets;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -61,9 +63,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigationView);
+        navigationView = findViewById(R.id.naView);
         hamburgerButton = findViewById(R.id.hamburgerButton);
+        navigationView.setClickable(true);
+        navigationView.setFocusable(true);
+        navigationView.bringToFront(); // Even though it appears visible
+        navigationView.requestLayout();
+        navigationView.invalidate();
         ArrayList<Category> receivedItems = getIntent().getParcelableArrayListExtra("category_list");
+
 
         System.out.println("MainActivity"+ receivedItems.get(0).getCategoryName());
 
@@ -72,14 +80,6 @@ public class MainActivity extends AppCompatActivity {
         // --- Setup Featured Products RecyclerView ---
         featuredProductsRecyclerView = findViewById(R.id.featuredProductsRecyclerView);
         featuredProductsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-     /*   List<Product> featuredProducts = new ArrayList<>();
-        // Add sample products (replace with your actual product images/data)
-        featuredProducts.add(new Product("Stylish Watch", "$120.00", R.drawable.placeholder_product_image,1));
-        featuredProducts.add(new Product("Wireless Headphones", "$75.50", R.drawable.placeholder_product_image,1));
-        featuredProducts.add(new Product("Smart Speaker", "$50.00", R.drawable.placeholder_product_image,1));
-        featuredProducts.add(new Product("Designer Backpack", "$90.00", R.drawable.placeholder_product_image,1));
-        ProductAdapter productAdapter = new ProductAdapter(featuredProducts);
-        featuredProductsRecyclerView.setAdapter(productAdapter);*/
 
 
         // --- Setup Categories RecyclerView ---
@@ -93,42 +93,22 @@ public class MainActivity extends AppCompatActivity {
 
         categoriesRecyclerView.setAdapter(categoryAdapter);
 
+        navigationView.inflateMenu(R.menu.drawer_menu);
+        hamburgerButton.setOnClickListener(v ->drawerLayout.openDrawer(GravityCompat.START));
 
-        hamburgerButton.setOnClickListener(v -> drawerLayout.openDrawer(navigationView));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_categories) {
-                // Your existing logic for toggling sub-menu visibility
-                SubMenu subMenu = item.getSubMenu();
-                if (subMenu != null) {
-                    for (int i = 0; i < subMenu.size(); i++) {
-                        MenuItem subItem = subMenu.getItem(i);
-                        subItem.setVisible(!subItem.isVisible()); // Toggle visibility
-                    }
-                }
-                Toast.makeText(this, "Categories Clicked", Toast.LENGTH_SHORT).show();
-            } else if(id == R.id.po) { // This seems to be a specific item in your drawer_menu.xml
-                Intent intent = new Intent(MainActivity.this, IceCreamShowList.class); // Assuming IceCreamShowList is an Activity
+            if(id == R.id.nav_home){
+                Toast.makeText(MainActivity.this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, IceCreamActivity.class);
                 startActivity(intent);
-            } else if (id == R.id.nav_orders) {
-                Toast.makeText(this, "Orders Clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_profile) {
-                Toast.makeText(this, "Profile Clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_settings) {
-                Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_share) {
-                Toast.makeText(this, "Share Clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_logout) {
-                Toast.makeText(this, "Logout Clicked", Toast.LENGTH_SHORT).show();
             }
-            drawerLayout.closeDrawer(navigationView);
             return true;
         });
 
-        findViewById(R.id.homeButton).setOnClickListener(v -> Toast.makeText(this, "Home Button Clicked", Toast.LENGTH_SHORT).show());
+
+        // findViewById(R.id.homeButton).setOnClickListener(v -> Toast.makeText(this, "Home Button Clicked", Toast.LENGTH_SHORT).show());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
