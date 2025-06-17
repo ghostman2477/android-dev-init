@@ -87,6 +87,7 @@ public class IceCreamActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Handle the button click event
                 Intent intent = new Intent(IceCreamActivity.this, MainActivity.class);
+                intent.putParcelableArrayListExtra("category_list", categories);
                 startActivity(intent); // Move to another screen
             }
         });
