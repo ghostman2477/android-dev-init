@@ -30,25 +30,16 @@
                 android:src="@drawable/ic_menu"
                 app:tint="?attr/colorOnPrimary" />
 
-            <TextView
-                android:id="@+id/homeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Home Screen"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="?attr/colorOnPrimary" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"/> </androidx.appcompat.widget.Toolbar>
+<!--            <ToggleButton-->
+<!--                android:id="@+id/toggleButton3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="ToggleButton"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:layout_marginEnd="16dp"/> -->
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

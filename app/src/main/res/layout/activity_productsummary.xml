@@ -14,16 +14,16 @@
         android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/naView"
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/drawer_menu"
-        />
+        app:menu="@menu/drawer_menu" />
 
-        <include layout="@layout/content_main" />
+    <include layout="@layout/product_order_summary" />
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
