@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,8 +18,21 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomerInfoActivity extends AppCompatActivity {
 
@@ -34,7 +48,12 @@ public class CustomerInfoActivity extends AppCompatActivity {
     private TextInputLayout pinInputLayout;
     private TextInputEditText pinEditText;
     private Button proceedButton;
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:7017/") // Base URL
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
+    ApiService apiService = retrofit.create(ApiService.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +109,42 @@ public class CustomerInfoActivity extends AppCompatActivity {
                 // // ... add other fields
                 // startActivity(intent);
                 // finish(); // Optional: finish this activity if user shouldn't return here easily
+                List<SaveOrder.ProductOrderRequest> products = new ArrayList<>();
+                final ArrayList<ProductAddToCart> productList = getIntent().getParcelableArrayListExtra("productAddToCarts");
+               for(ProductAddToCart p : productList){
+                   products.add(new SaveOrder.ProductOrderRequest(p.getProductId(),p.getQtySelected()));
+               }
+
+
+                SaveOrder saveOrder = new SaveOrder();
+                saveOrder.setCity(cityEditText.getText().toString());
+                saveOrder.setName(nameEditText.getText().toString());
+                saveOrder.setPhone(phoneEditText.getText().toString());
+                saveOrder.setPincode(pinEditText.getText().toString());
+                saveOrder.setState("West Bengal");
+                saveOrder.setOrderStatus("Ordered Successfully");
+                saveOrder.setAddressfirstLine(addressEditText.getText().toString());
+                saveOrder.setProducts(products);
+                System.out.print(saveOrder.getCity()+" "+saveOrder.getName()+" "+saveOrder.getPhone()+" "
+                +saveOrder.getState());
+                Call<Void> call = apiService.saveOrders(saveOrder);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("RETROFIT", "Product saved successfully!");
+                        } else {
+                            Log.e("RETROFIT", "Failed to save: " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.e("RETROFIT", "Error: " + t.getMessage());
+                    }
+                });
+
+
             } else {
                 Toast.makeText(this, "Please correct the errors.", Toast.LENGTH_SHORT).show();
             }
