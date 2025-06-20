@@ -16,21 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.example.myapplication.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(id == R.id.nav_orders ){
                 Toast.makeText(MainActivity.this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, TrackOrder.class);
+                Intent intent = new Intent(this, TrackOrder_mbl_no.class);
                 startActivity(intent);
             }
             return true;

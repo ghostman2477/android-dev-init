@@ -75,7 +75,7 @@ public class IceCreamShowList extends AppCompatActivity {
             }
             else if(id == R.id.nav_orders ){
                 Toast.makeText(this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, TrackOrder.class);
+                Intent intent = new Intent(this, TrackOrder_mbl_no.class);
                 startActivity(intent);
             }
             return true;

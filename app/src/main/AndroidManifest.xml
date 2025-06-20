@@ -19,17 +19,20 @@
             android:name=".TrackOrder"
             android:exported="false" />
         <activity
-            android:name=".ProductSummary"
+            android:name=".TrackOrder_mbl_no"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".product_summary"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.MyApplication" />-->
+        <activity
+            android:name=".ProductSummary"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".product_summary" -->
+        <!-- android:exported="false" -->
+        <!-- android:theme="@style/Theme.MyApplication" /> -->
         <activity
             android:name=".IceCreamShowList"
             android:exported="false" />
-        <activity android:name=".CustomerInfoActivity"
-                    android:exported="false" />
+        <activity
+            android:name=".CustomerInfoActivity"
+            android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"

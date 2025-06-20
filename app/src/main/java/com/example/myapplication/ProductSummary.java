@@ -10,14 +10,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProductSummary extends AppCompatActivity {
 
@@ -55,13 +53,12 @@ public class ProductSummary extends AppCompatActivity {
             }
             else if(id == R.id.nav_orders ){
                 Toast.makeText(this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, TrackOrder.class);
+                Intent intent = new Intent(this, TrackOrder_mbl_no.class);
                 startActivity(intent);
             }
             return true;
         });
-       ArrayList<ProductAddToCart> productList = new ArrayList<>();
-        productList = getIntent().getParcelableArrayListExtra("productAddToCarts");
+      final ArrayList<ProductAddToCart> productList = getIntent().getParcelableArrayListExtra("productAddToCarts");
         System.out.println("Ayan find size: "+productList.size());
         adapter = new ProductSummaryAdapter(productList);
         productsRecyclerView.setAdapter(adapter);
@@ -69,6 +66,7 @@ public class ProductSummary extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(ProductSummary.this, CustomerInfoActivity.class);
+                intent.putParcelableArrayListExtra("productAddToCarts", productList);
                 startActivity(intent);
             }
         });
