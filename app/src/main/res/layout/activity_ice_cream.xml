@@ -15,7 +15,7 @@
     android:src="@drawable/placeholder_ice_cream"
     android:contentDescription="Ice Cream Image Placeholder"
     android:layout_marginBottom="48dp"
-    android:scaleType="fitCenter" />
+    android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/iceCreamTitle"
@@ -49,5 +49,4 @@
         android:paddingVertical="16dp"
         app:cornerRadius="8dp"
         android:textAppearance="?attr/textAppearanceButton"/>
-
 </LinearLayout>
