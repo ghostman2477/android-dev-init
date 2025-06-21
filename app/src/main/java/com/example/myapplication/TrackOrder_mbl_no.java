@@ -41,7 +41,7 @@ public class TrackOrder_mbl_no extends AppCompatActivity {
         hamburgerButton.setOnClickListener(v ->drawerLayout.openDrawer(GravityCompat.START));
         super.onCreate(savedInstanceState);
 
-        navigationView.setNavigationItemSelectedListener(item -> {
+       navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.nav_home){
                 Toast.makeText(this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -54,11 +54,11 @@ public class TrackOrder_mbl_no extends AppCompatActivity {
                 startActivity(intent);
             }
             return true;
-        });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+     });
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+//            return insets;
+//      });
     }
 }
