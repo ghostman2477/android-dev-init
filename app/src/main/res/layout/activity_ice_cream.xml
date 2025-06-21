@@ -14,7 +14,7 @@
         android:layout_marginTop="80dp"
         android:contentDescription="Delicious Ice Cream"
         android:elevation="16dp"
-        android:src="@drawable/ice_cream_logo"
+        android:src="@drawable/img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="250dp"
         app:cardBackgroundColor="#33FFFFFF"
         app:cardCornerRadius="24dp"
         app:cardElevation="0dp"
