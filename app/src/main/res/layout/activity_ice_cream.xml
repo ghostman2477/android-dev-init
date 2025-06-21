@@ -8,20 +8,22 @@
     android:gravity="center"
     android:padding="24dp"
     android:background="@android:color/white"
-    tools:context=".IceCreamActivity"> <ImageView
-    android:id="@+id/iceCreamImageView"
-    android:layout_width="120dp"
-    android:layout_height="120dp"
-    android:src="@drawable/placeholder_ice_cream"
-    android:contentDescription="Ice Cream Image Placeholder"
-    android:layout_marginBottom="48dp"
-    android:scaleType="fitCenter"/>
+    tools:context=".IceCreamActivity">
+
+    <ImageView
+        android:id="@+id/iceCreamImageView"
+        android:layout_width="234dp"
+        android:layout_height="255dp"
+        android:layout_marginBottom="48dp"
+        android:contentDescription="Ice Cream Image Placeholder"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ice_cream_logo" />
 
     <TextView
         android:id="@+id/iceCreamTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ICE CREAM"
+        android:text="ICE MANIA"
         android:textAppearance="?attr/textAppearanceHeadline3"
         android:textColor="@android:color/black"
         android:textStyle="bold"
