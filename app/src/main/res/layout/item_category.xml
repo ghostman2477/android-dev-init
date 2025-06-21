@@ -2,34 +2,35 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="233dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/catImageView"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_width="76dp"
+            android:layout_height="72dp"
+            android:contentDescription="Product Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/placeholder_product_image"
-            android:contentDescription="Product Image" />
+            android:src="@drawable/placeholder_product_image" />
 
         <TextView
             android:id="@+id/catNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Category Name"
-            android:maxLines="2"
             android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingLeft="5dp"
+            android:text="Category Name"
             android:textAppearance="?attr/textAppearanceSubtitle2"
             android:textColor="@android:color/black" />
 
