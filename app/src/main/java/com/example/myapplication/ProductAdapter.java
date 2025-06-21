@@ -93,12 +93,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.buttonMinus.setOnClickListener(v -> {
             int qtyremoved = product.getInStock() - 1;
-            if (qtyremoved > 1) {
+            if (qtyremoved >= 1) {
                 product.setInStock(qtyremoved);
                 holder.productQuantity.setText(String.valueOf(product.getInStock()));
             }
             else{
                 productAddToCarts.remove(p);
+            }
+            if(productAddToCarts.contains(p)){
+                for (int i=0;i<productAddToCarts.size();i++) {
+                    ProductAddToCart productsInCart = productAddToCarts.get(i);
+                    if (productsInCart.getProductId().equals(product.getProductId())) {
+                        productsInCart.setQtySelected(qtyremoved);
+                        productAddToCarts.set(i, productsInCart);
+                        break;
+                    }
+                }
             }
         });
     }
