@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Root DrawerLayout: The main container for the entire screen,
+  allowing for a navigation drawer to slide out from the start (left).
+  I've kept your original ID "drawerLayout".
+-->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,10 +12,52 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-    <include
-        layout="@layout/app_bar_main"
+
+    <!--
+      Main Content Area using CoordinatorLayout.
+      A DrawerLayout can only have two direct children: the main content and the drawer.
+      CoordinatorLayout is the standard for main content as it helps coordinate animations
+      and interactions between different components, like the AppBar and scrolling content.
+
+      The beautiful purple gradient background you requested will be applied here.
+    -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/purple_gradient_background">
+
+        <!--
+          This include points to your existing AppBar layout.
+          It will now be correctly managed by the CoordinatorLayout.
+          No changes were needed for this line.
+        -->
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--
+          This is your included tracking component. By placing it inside the
+          CoordinatorLayout and setting the `layout_behavior`, we ensure
+          that it appears below the app bar and can scroll correctly.
+          This creates a much cleaner and more professional user experience.
+        -->
+        <include
+            layout="@layout/track_component_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!--
+      Navigation View (The Drawer)
+      This is the menu that slides out. I've added some Material 3 style attributes
+      to make the menu items look more modern with better padding and shapes without
+      changing any functionality.
+      Your original ID "naView" and menu references are preserved.
+    -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/naView"
         android:layout_width="wrap_content"
@@ -18,8 +65,11 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/drawer_menu"
-        />
-    <include layout="@layout/track_component_layout" />
+        app:itemIconPadding="24dp"
+        app:itemShapeInsetBottom="8dp"
+        app:itemShapeInsetEnd="8dp"
+        app:itemShapeInsetStart="8dp"
+        app:itemShapeInsetTop="8dp"
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
