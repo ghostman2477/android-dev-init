@@ -12,6 +12,7 @@ import android.widget.Toast; // For the click listener example
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R; // Make sure this import is correct for your R file
 import com.example.myapplication.Category; // Import your Category model class
 
@@ -40,7 +41,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         // Bind data to the views in the ViewHolder
         holder.categoryName.setText(category.getCategoryName());
-      //  holder.categoryIcon.setImageResource(category.getIconUrl());
+        Glide.with(holder.itemView.getContext())
+                .load(category.getCategoryIconUrl())
+                .into(holder.categoryIcon);
+
 
         // Optional: Add a click listener for the entire item
         holder.itemView.setOnClickListener(v -> {
