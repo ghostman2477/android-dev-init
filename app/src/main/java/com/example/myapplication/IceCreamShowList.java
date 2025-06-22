@@ -93,7 +93,7 @@ public class IceCreamShowList extends AppCompatActivity {
                         for(int i=0;i<products.size();i++){
                            System.out.println("OK"+products.get(i).getProductName());
                         }
-                        ProductAdapter productAdapter = new ProductAdapter(productAddToCarts,products,fab);
+                        ProductAdapter productAdapter = new ProductAdapter(products,fab);
                         productsRecyclerView.setAdapter(productAdapter);
                         Log.d("Response", response.body().string());
 
@@ -119,7 +119,6 @@ public class IceCreamShowList extends AppCompatActivity {
                     +productAddToCarts.get(i).getQtySelected());
                 }
               Intent intent = new Intent(view.getContext(), ProductSummary.class);
-              intent.putParcelableArrayListExtra("productAddToCarts", productAddToCarts);
               view.getContext().startActivity(intent);
             }
         });

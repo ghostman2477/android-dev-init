@@ -26,10 +26,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productList;
     private Context context;
 
-    private ArrayList<ProductAddToCart> productAddToCarts = new ArrayList<>();
+
     private ExtendedFloatingActionButton fab;
-    public ProductAdapter(ArrayList<ProductAddToCart> productAddToCarts, List<Product> productList,ExtendedFloatingActionButton fab) {
-        this.productAddToCarts = productAddToCarts;
+    public ProductAdapter( List<Product> productList,ExtendedFloatingActionButton fab) {
         this.productList = productList;
         this.fab = fab;
     }
@@ -68,12 +67,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             if(fab.getVisibility() == View.INVISIBLE){
                 fab.setVisibility(View.VISIBLE);
             }
-            if(productAddToCarts.contains(p)){
-                for (int i=0;i<productAddToCarts.size();i++) {
-                    ProductAddToCart productsInCart = productAddToCarts.get(i);
+            if(CurrentlyInCart.getInstance().getSharedList().contains(p)){
+                for (int i=0;i<CurrentlyInCart.getInstance().getSharedList().size();i++) {
+                    ProductAddToCart productsInCart = CurrentlyInCart.getInstance().getSharedList().get(i);
                     if (productsInCart.getProductId().equals(product.getProductId())) {
                         productsInCart.setQtySelected(qtyselected);
-                        productAddToCarts.set(i, productsInCart);
+                        CurrentlyInCart.getInstance().getSharedList().set(i, productsInCart);
                         break;
                     }
                 }
@@ -86,7 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 p.setCategoryName(product.getCategoryName());
                 p.setFlavourName(product.getFlavourName());
                 p.setProductPrice(product.getProductPrice());
-                productAddToCarts.add(p);
+                CurrentlyInCart.getInstance().getSharedList().add(p);
             }
 
         });
@@ -97,18 +96,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 product.setInStock(qtyremoved);
                             }
             else{
-                productAddToCarts.remove(p);
+                CurrentlyInCart.getInstance().getSharedList().remove(p);
             }
             if(qtyremoved >= 0) {
                 holder.productQuantity.setText(String.valueOf(qtyremoved));
             }
 
-            if(productAddToCarts.contains(p)){
-                for (int i=0;i<productAddToCarts.size();i++) {
-                    ProductAddToCart productsInCart = productAddToCarts.get(i);
+            if(CurrentlyInCart.getInstance().getSharedList().contains(p)){
+                for (int i=0;i<CurrentlyInCart.getInstance().getSharedList().size();i++) {
+                    ProductAddToCart productsInCart = CurrentlyInCart.getInstance().getSharedList().get(i);
                     if (productsInCart.getProductId().equals(product.getProductId())) {
                         productsInCart.setQtySelected(qtyremoved);
-                        productAddToCarts.set(i, productsInCart);
+                        CurrentlyInCart.getInstance().getSharedList().set(i, productsInCart);
                         break;
                     }
                 }

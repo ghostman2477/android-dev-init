@@ -58,15 +58,14 @@ public class ProductSummary extends AppCompatActivity {
             }
             return true;
         });
-      final ArrayList<ProductAddToCart> productList = getIntent().getParcelableArrayListExtra("productAddToCarts");
-        System.out.println("Ayan find size: "+productList.size());
+      final ArrayList<ProductAddToCart> productList = (ArrayList<ProductAddToCart>) CurrentlyInCart.getInstance().getSharedList();
+
         adapter = new ProductSummaryAdapter(productList);
         productsRecyclerView.setAdapter(adapter);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(ProductSummary.this, CustomerInfoActivity.class);
-                intent.putParcelableArrayListExtra("productAddToCarts", productList);
                 startActivity(intent);
             }
         });
