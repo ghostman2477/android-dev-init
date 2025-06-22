@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -79,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
         categoriesRecyclerView = findViewById(R.id.categoriesRecyclerView);
         // Assuming content_main.xml uses LinearLayoutManager for vertical scrolling or GridLayoutManager
         categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        int spacingInPixels = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+
+        categoriesRecyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(2, spacingInPixels, true));
+
         // If you want a grid, use: categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns for categories
 
 
