@@ -110,7 +110,7 @@ public class CustomerInfoActivity extends AppCompatActivity {
                 // startActivity(intent);
                 // finish(); // Optional: finish this activity if user shouldn't return here easily
                 List<SaveOrder.ProductOrderRequest> products = new ArrayList<>();
-                final ArrayList<ProductAddToCart> productList = getIntent().getParcelableArrayListExtra("productAddToCarts");
+                final ArrayList<ProductAddToCart> productList = (ArrayList<ProductAddToCart>) CurrentlyInCart.getInstance().getSharedList();
                for(ProductAddToCart p : productList){
                    products.add(new SaveOrder.ProductOrderRequest(p.getProductId(),p.getQtySelected()));
                }
