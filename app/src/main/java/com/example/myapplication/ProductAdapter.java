@@ -95,11 +95,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             int qtyremoved = product.getInStock() - 1;
             if (qtyremoved >= 1) {
                 product.setInStock(qtyremoved);
-                holder.productQuantity.setText(String.valueOf(product.getInStock()));
-            }
+                            }
             else{
                 productAddToCarts.remove(p);
             }
+            if(qtyremoved >= 0) {
+                holder.productQuantity.setText(String.valueOf(qtyremoved));
+            }
+
             if(productAddToCarts.contains(p)){
                 for (int i=0;i<productAddToCarts.size();i++) {
                     ProductAddToCart productsInCart = productAddToCarts.get(i);
