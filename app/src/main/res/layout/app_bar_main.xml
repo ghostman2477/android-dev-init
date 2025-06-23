@@ -53,7 +53,7 @@
 
             <!-- Profile Icon for a balanced look -->
             <ImageButton
-                android:id="@+id/profileButton"
+                android:id="@+id/cartButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -62,7 +62,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="12dp"
-                android:src="@drawable/ic_account_circle"
+                android:src="@drawable/shopping_cart"
                 app:tint="@android:color/white" />
 
         </androidx.appcompat.widget.Toolbar>
