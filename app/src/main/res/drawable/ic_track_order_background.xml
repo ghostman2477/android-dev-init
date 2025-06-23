@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This layer-list combines the gradient circle and a vector icon
+  to create the final colorful tracking icon.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Layer 1: The orange gradient circle -->
+    <item android:drawable="@drawable/orange_gradient_circle" />
+
+    <!-- Layer 2: The truck icon, tinted white and inset slightly -->
+    <item
+        android:width="20dp"
+        android:height="20dp"
+        android:gravity="center">
+        <bitmap
+            android:src="@drawable/ic_local_shipping"
+            android:tint="@android:color/white" />
+    </item>
+</layer-list>

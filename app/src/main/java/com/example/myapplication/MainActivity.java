@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton orderTypeToggleButton;
     private RecyclerView featuredProductsRecyclerView; //
     private RecyclerView categoriesRecyclerView;
+
+    private ImageButton cartButton;
     // Inside your MainActivity.java class
 
 // Make sure these are declared at the class level (outside onCreate)
@@ -59,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.naView);
         hamburgerButton = findViewById(R.id.hamburgerButton);
+        cartButton = findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(v -> {
+            // This is the code that runs when the cart button is clicked
+            // I'm assuming your summary page is named ProductSummaryActivity.
+            // If it's different, just change the class name here.
+            Intent intent = new Intent(MainActivity.this, ProductSummary.class);
+            startActivity(intent);
+        });
         navigationView.setClickable(true);
         navigationView.setFocusable(true);
         navigationView.bringToFront(); // Even though it appears visible
