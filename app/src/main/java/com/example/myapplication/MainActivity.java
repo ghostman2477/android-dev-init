@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton orderTypeToggleButton;
     private RecyclerView featuredProductsRecyclerView; //
     private RecyclerView categoriesRecyclerView;
+
+    private ImageButton cartButton;
     // Inside your MainActivity.java class
 
 // Make sure these are declared at the class level (outside onCreate)
@@ -58,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.naView);
         hamburgerButton = findViewById(R.id.hamburgerButton);
+        cartButton = findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(v -> {
+            // This is the code that runs when the cart button is clicked
+            // I'm assuming your summary page is named ProductSummaryActivity.
+            // If it's different, just change the class name here.
+            Intent intent = new Intent(MainActivity.this, ProductSummary.class);
+            startActivity(intent);
+        });
         navigationView.setClickable(true);
         navigationView.setFocusable(true);
         navigationView.bringToFront(); // Even though it appears visible
@@ -79,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         categoriesRecyclerView = findViewById(R.id.categoriesRecyclerView);
         // Assuming content_main.xml uses LinearLayoutManager for vertical scrolling or GridLayoutManager
         categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        int spacingInPixels = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+
+        categoriesRecyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(2, spacingInPixels, true));
+
         // If you want a grid, use: categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns for categories
 
 

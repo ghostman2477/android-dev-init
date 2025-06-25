@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Categories"
+            android:text="Collections"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:layout_marginBottom="8dp" />
 

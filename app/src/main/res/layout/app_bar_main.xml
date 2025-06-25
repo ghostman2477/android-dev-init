@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  CORRECTION: The crucial CoordinatorLayout has been restored as the root element.
+  This is the main container for your entire activity screen.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,39 +11,67 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
+      This is the refactored AppBarLayout, now correctly placed inside
+      the CoordinatorLayout.
+    -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.EcommerceApp.AppBarOverlay">
+        android:layout_height="wrap_content">
 
+        <!-- The Toolbar with the purple gradient background and improved UI -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@drawable/purple_gradient_background"
+            app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/Theme.EcommerceApp.PopupOverlay">
 
+            <!-- Hamburger Menu Icon (ID preserved) -->
             <ImageButton
                 android:id="@+id/hamburgerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="12dp"
                 android:src="@drawable/ic_menu"
-                app:tint="?attr/colorOnPrimary" />
+                app:tint="@android:color/white" />
 
-<!--            <ToggleButton-->
-<!--                android:id="@+id/toggleButton3"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="ToggleButton"-->
-<!--                android:layout_gravity="end"-->
-<!--                android:layout_marginEnd="16dp"/> -->
+            <!-- Centered Title for a balanced look -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dashboard"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Profile Icon for a balanced look -->
+            <ImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12dp"
+                android:src="@drawable/shopping_cart"
+                app:tint="@android:color/white" />
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--
+      Any other content for your main screen, like a RecyclerView or a NestedScrollView,
+      would go here, below the AppBarLayout.
+    -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

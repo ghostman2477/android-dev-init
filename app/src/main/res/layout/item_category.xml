@@ -1,37 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  UI/UX UPGRADE: Switched to MaterialCardView.
+  It provides more modern styling options, like the subtle stroke I've added.
+  I've increased the corner radius for a softer, more modern look and set the layout
+  width to match_parent, which is better practice for items in a list or grid.
+  The clickable foreground provides a nice ripple effect on touch.
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#1F000000"
+    app:strokeWidth="1dp">
 
+    <!--
+      UI/UX UPGRADE: Switched to a vertical orientation.
+      This common pattern creates a strong visual hierarchy, making the image the "hero"
+      of the card. It's cleaner and scales better on different screen sizes than a
+      fixed-width horizontal layout.
+    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:orientation="vertical">
 
+        <!--
+          UI/UX UPGRADE: The ImageView is now larger and more prominent.
+          Setting the width to match_parent and height to a fixed value (e.g., 140dp)
+          creates a consistent and visually dominant image area.
+          The ID is preserved.
+        -->
         <ImageView
             android:id="@+id/catImageView"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
+            android:contentDescription="Category Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/placeholder_product_image"
-            android:contentDescription="Product Image" />
+            android:src="@drawable/placeholder_product_image" />
 
+        <!--
+          UI/UX UPGRADE: The TextView is now centered below the image.
+          Increased padding gives the text more breathing room, improving readability.
+          I've also slightly increased the text size for better legibility.
+          The ID is preserved.
+        -->
         <TextView
             android:id="@+id/catNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
             android:text="Category Name"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:textAppearance="?attr/textAppearanceSubtitle2"
-            android:textColor="@android:color/black" />
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
